@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-23 23:41:29
+LastEditTime: 2023-08-24 00:16:53
 Description: file content
 '''
 import os
@@ -36,13 +36,13 @@ def download_bin():
     response = requests.get(api_url)
     data = response.json()
     tag_name = data["tag_name"]
-
+    print(f"Downloading sd-webui-discord {tag_name}...")
     download_url = f"https://github.com/SpenserCai/sd-webui-discord/releases/download/{tag_name}/sd-webui-discord-release-{tag_name}.tar.gz"
     response = requests.get(download_url)
     release_path = os.path.join(bin_path, f"sd-webui-discord-{tag_name}.tar.gz")
     with open(release_path, "wb") as file:
         file.write(response.content)
-
+    print("Extracting sd-webui-discord...")
     with tarfile.open(release_path, "r:gz") as tar:
         members = [m for m in tar.getmembers() if m.name.startswith("release")]
         tar.extractall(path=bin_path, members=members)
@@ -50,6 +50,7 @@ def download_bin():
 
     with open(os.path.join(bin_path, ".version"), "w") as file:
         file.write(tag_name)
+    print("Done!")
     
 
     
