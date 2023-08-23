@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 00:16:53
+LastEditTime: 2023-08-24 00:23:35
 Description: file content
 '''
 import os
@@ -45,7 +45,11 @@ def download_bin():
     print("Extracting sd-webui-discord...")
     with tarfile.open(release_path, "r:gz") as tar:
         members = [m for m in tar.getmembers() if m.name.startswith("release")]
-        tar.extractall(path=bin_path, members=members)
+        for member in members:
+            if member.isfile():
+                filename = os.path.basename(member.name)
+                tar.extract(member, path=os.path.join(bin_path, filename))
+    
     os.remove(release_path)
 
     with open(os.path.join(bin_path, ".version"), "w") as file:
