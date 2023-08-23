@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 00:23:35
+LastEditTime: 2023-08-24 00:26:43
 Description: file content
 '''
 import os
@@ -11,6 +11,7 @@ import modules.scripts as scripts
 import requests
 import sys
 import tarfile
+import shutil
 
 def get_my_dir():
     if os.path.isdir("extensions/sd-webui-discord-ex"):
@@ -45,10 +46,12 @@ def download_bin():
     print("Extracting sd-webui-discord...")
     with tarfile.open(release_path, "r:gz") as tar:
         members = [m for m in tar.getmembers() if m.name.startswith("release")]
-        for member in members:
-            if member.isfile():
-                filename = os.path.basename(member.name)
-                tar.extract(member, path=os.path.join(bin_path, filename))
+        tar.extractall(path=bin_path, members=members)
+    # 判断release目录是否存在，如果存在把里面的文件移动到bin目录下，然后删除release目录
+    if os.path.isdir(os.path.join(bin_path, "release")):
+        for file in os.listdir(os.path.join(bin_path, "release")):
+            shutil.move(os.path.join(bin_path, "release", file), bin_path)
+        shutil.rmtree(os.path.join(bin_path, "release"))
     
     os.remove(release_path)
 
