@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:23:23
+LastEditTime: 2023-08-24 11:25:37
 Description: file content
 '''
 import os
@@ -13,8 +13,12 @@ import sys
 import tarfile
 import shutil
 
-bin_path = os.path.join(scripts.basedir(), "bin")
+bin_path = None
 api_url = "https://api.github.com/repos/SpenserCai/sd-webui-discord/releases/latest"
+
+def init_base():
+    global bin_path
+    bin_path = os.path.join(scripts.basedir(), "bin")
 
 def get_bin_process_path():
     if sys.platform == "win32":
