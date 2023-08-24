@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:08:44
+LastEditTime: 2023-08-24 14:15:08
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -43,10 +43,11 @@ def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
         with gr.Row():
             with gr.Column():
-                gr.Label("DISCORD TOKEN:" + get_desensitization_token(load_config("token")))
-                gr.Label("DISCORD SERVER ID:" + load_config("server_id"))
-
-                gr.Label("WebUI NODE LIST")
+                j_data = {
+                    "token": get_desensitization_token(load_config("token")),
+                    "server_id": load_config("server_id")
+                }
+                gr.JSON(j_data, label="Discord Config")
                 node_list = load_config("node_list")
                 node_array = []
                 for node in node_list:
