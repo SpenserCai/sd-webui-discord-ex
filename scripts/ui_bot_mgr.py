@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 22:43:09
+LastEditTime: 2023-08-24 22:53:35
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -45,7 +45,14 @@ def start_bot(log):
         return "Already Running\n"
     process_ctrl.ProcessCtrl.start()
     while process_ctrl.ProcessCtrl.is_running():
-        yield process_ctrl.ProcessCtrl.LogData
+        jsCode = """
+        <script>
+            var logArea = document.getElementById('log_area');
+            var textarea = logArea.querySelector('textarea');
+            textarea.scrollTop = textarea.scrollHeight;
+        </script>
+        """
+        yield process_ctrl.ProcessCtrl.LogData + jsCode
         time.sleep(1)
 
 def stop_bot():
