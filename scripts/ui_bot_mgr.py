@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 23:26:06
+LastEditTime: 2023-08-24 23:38:58
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -78,21 +78,32 @@ def discord_tab():
                 gr.Label("SD-WEBUI-DISCORD LOG")
                 # 一个长文本框，显示日至，只读的
                 log = gr.Textbox(lines=25, readonly=True, elem_id="log_area")
-                jscode = """
+                start_jscode = """
                 function() {
+                    if (window.discord_ex_log) {
+                        window.clearInterval(window.discord_ex_log);
+                    }
                     var logArea = document.getElementById('log_area');
                     var textarea = logArea.querySelector('textarea');
-                    window.setInterval(function() {
+                    window.discord_ex_log = window.setInterval(function() {
                         textarea.scrollTop = textarea.scrollHeight;
                         console.log("scroll");
                     }, 500);
+                    
+                }
+                """
+                stop_jscode = """
+                function() {
+                    if (window.discord_ex_log) {
+                        window.clearInterval(window.discord_ex_log);
+                    }
                 }
                 """
                 # 一个启动按钮
                 start_button = gr.Button("Start")
                 stop_button = gr.Button("Stop")
-                start_button.click(inputs=[log],outputs=[log],fn=start_bot,_js=jscode)
-                stop_button.click(inputs=[],outputs=[log],fn=stop_bot)
+                start_button.click(inputs=[log],outputs=[log],fn=start_bot,_js=start_jscode)
+                stop_button.click(inputs=[],outputs=[log],fn=stop_bot,_js=stop_jscode)
                 
 
 
