@@ -18,7 +18,7 @@ api_url = "https://api.github.com/repos/SpenserCai/sd-webui-discord/releases/lat
 
 def init_base():
     global bin_path
-    bin_path = os.path.join(scripts.basedir(), "bin")
+    bin_path = os.path.join(get_my_dir(), "bin")
 
 def get_bin_process_path():
     if sys.platform == "win32":
