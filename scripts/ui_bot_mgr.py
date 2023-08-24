@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:38:06
+LastEditTime: 2023-08-24 11:45:22
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -39,15 +39,13 @@ def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
         with gr.Row():
             with gr.Column():
-                gr.Label("Discord Bot Token")
-                token = gr.Textbox(lines=1, placeholder="Enter your Discord Bot Token")
+                token = gr.Textbox(placeholder="Enter your Discord Bot Token", label="Discord Bot Token")
                 token.value = get_desensitization_token(load_config("token"))
-                token_old = gr.Textbox(lines=1, placeholder="Enter your Discord Bot Token")
-                token_old.style = "display:none"
-                token_old.value = get_desensitization_token(load_config("token"))
+
+                token_old = gr.Textbox(visible=False)
+                token_old.value = load_config("token")
                 
-                gr.Label("Discord Server ID")
-                server_id = gr.Textbox(lines=1, placeholder="Enter your Discord Server ID")
+                server_id = gr.Textbox(placeholder="Enter your Discord Server ID", label="Discord Server ID")
                 server_id.value = load_config("server_id")
                 # 一个保存按钮
                 save = gr.Button("Save")
