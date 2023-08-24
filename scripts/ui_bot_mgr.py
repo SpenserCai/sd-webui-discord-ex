@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 13:26:31
+LastEditTime: 2023-08-24 13:37:09
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -17,9 +17,11 @@ from scripts import base
 def load_config(key):
     jsonObject = {}
     config_path = os.path.join(base.get_bin_path(), "config.json")
+    print(config_path)
     if os.path.isfile(config_path):
         with open(config_path, "r") as file:
             jsonObject = json.load(file)
+    print(jsonObject)
     if key == "token":
         return jsonObject.get("discord", {}).get("token", "")
     elif key == "server_id":
