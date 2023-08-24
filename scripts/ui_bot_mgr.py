@@ -18,11 +18,9 @@ from scripts import process_ctrl
 def load_config(key):
     jsonObject = {}
     config_path = os.path.join(base.get_bin_path(), "config.json")
-    print(config_path)
     if os.path.isfile(config_path):
         with open(config_path, "r") as file:
             jsonObject = json.load(file)
-    print(jsonObject)
     if key == "token":
         return jsonObject.get("discord", {}).get("token", "")
     elif key == "server_id":
