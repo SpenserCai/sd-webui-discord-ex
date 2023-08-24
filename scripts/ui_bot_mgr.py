@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 13:54:25
+LastEditTime: 2023-08-24 14:08:44
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -43,10 +43,9 @@ def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
         with gr.Row():
             with gr.Column():
-                gr.Label("DISCORD CONFIG")
-                token = gr.Textbox(label="Discord Bot Token",value=get_desensitization_token(load_config("token")))
-                server_id = gr.Textbox(label="Discord Server ID",value=load_config("server_id"))
-                
+                gr.Label("DISCORD TOKEN:" + get_desensitization_token(load_config("token")))
+                gr.Label("DISCORD SERVER ID:" + load_config("server_id"))
+
                 gr.Label("WebUI NODE LIST")
                 node_list = load_config("node_list")
                 node_array = []
@@ -54,8 +53,6 @@ def discord_tab():
                     node_array.append([node.get("name", ""), node.get("host", ""), node.get("max_concurrent", "")])
                 n_dataframe = gr.Dataframe(headers=["Name","Host","MaxConcurrent"], type="array", label="Node List")
                 n_dataframe.value = node_array
-
-
                 
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
