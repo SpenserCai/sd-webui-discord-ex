@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:15:46
+LastEditTime: 2023-08-24 11:18:57
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -41,7 +41,8 @@ def discord_tab():
                 gr.Label("Discord Bot Token")
                 token = gr.Textbox(lines=1, placeholder="Enter your Discord Bot Token")
                 token.value = get_desensitization_token(load_config("token"))
-                token_old = gr.Textbox(lines=1, placeholder="Enter your Discord Bot Token", type="hidden")
+                token_old = gr.Textbox(lines=1, placeholder="Enter your Discord Bot Token")
+                token_old.style = "display:none"
                 token_old.value = get_desensitization_token(load_config("token"))
                 
                 gr.Label("Discord Server ID")

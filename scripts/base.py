@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 09:36:03
+LastEditTime: 2023-08-24 11:23:23
 Description: file content
 '''
 import os
@@ -28,7 +28,7 @@ def get_my_dir():
     return scripts.basedir()
 
 def check_bin():
-    bin_path = os.path.join(get_my_dir(), "bin")
+    print(bin_path)
     if os.path.isfile(get_bin_process_path()):
         return True
     return False
@@ -39,6 +39,8 @@ def need_update():
     tag_name = data["tag_name"]
     with open(os.path.join(bin_path, ".version"), "r") as file:
         version = file.read()
+    # version 去掉头尾空格换行符
+    version = version.strip()
     if tag_name == version:
         return False
     return True
