@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 17:45:53
+LastEditTime: 2023-08-25 00:00:48
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -31,8 +31,6 @@ def load_config(key):
         return jsonObject.get("sd_webui", {}).get("servers", [])
     
 def get_desensitization_token(token):
-    print(token)
-    # 如果token不是<your token here>，则只保留开头和结尾各5个字符，如果总长度小于10，则全部替换为*
     if token != "<your token here>":
         if len(token) < 10:
             return "*" * len(token)
@@ -40,7 +38,6 @@ def get_desensitization_token(token):
     return token
 
 def start_bot(log):
-    # 如果已经在运行，则不再启动
     if process_ctrl.ProcessCtrl.is_running():
         return "Already Running\n"
     process_ctrl.ProcessCtrl.start()
@@ -76,14 +73,31 @@ def discord_tab():
                 
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
-                # 一个长文本框，显示日至，只读的
-                log = gr.Textbox(lines=25, readonly=True)
-                
-                # 一个启动按钮
+                log = gr.Textbox(lines=25, readonly=True, elem_id="log_area")
+                start_jscode = """
+                function() {
+                    if (window.discord_ex_log) {
+                        window.clearInterval(window.discord_ex_log);
+                    }
+                    var logArea = document.getElementById('log_area');
+                    var textarea = logArea.querySelector('textarea');
+                    window.discord_ex_log = window.setInterval(function() {
+                        textarea.scrollTop = textarea.scrollHeight;
+                    }, 500);
+                    
+                }
+                """
+                stop_jscode = """
+                function() {
+                    if (window.discord_ex_log) {
+                        window.clearInterval(window.discord_ex_log);
+                    }
+                }
+                """
                 start_button = gr.Button("Start")
                 stop_button = gr.Button("Stop")
-                start_button.click(inputs=[log],outputs=[log],fn=start_bot)
-                stop_button.click(inputs=[],outputs=[log],fn=stop_bot)
+                start_button.click(inputs=[log],outputs=[log],fn=start_bot,_js=start_jscode)
+                stop_button.click(inputs=[],outputs=[log],fn=stop_bot,_js=stop_jscode)
                 
 
 

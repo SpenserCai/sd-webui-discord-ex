@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-24 09:33:45
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 17:53:51
+LastEditTime: 2023-08-24 22:08:16
 Description: file content
 '''
 import subprocess
@@ -25,10 +25,10 @@ class ProcessCtrl:
         for line in iter(ProcessCtrl.__process.stdout.readline, ""):
             ProcessCtrl.AllLogData += line
             # LogData只保留最后10行
-            if len(ProcessCtrl.AllLogData.split("\n")) > 10:
-                ProcessCtrl.LogData = "\n".join(ProcessCtrl.AllLogData.split("\n")[-10:])
-            else:
-                ProcessCtrl.LogData = ProcessCtrl.AllLogData
+            #if len(ProcessCtrl.AllLogData.split("\n")) > 10:
+            #    ProcessCtrl.LogData = "\n".join(ProcessCtrl.AllLogData.split("\n")[-10:])
+            #else:
+            ProcessCtrl.LogData = ProcessCtrl.AllLogData
         ProcessCtrl.__process.wait()
         ProcessCtrl.__process = None
         ProcessCtrl.__status = False
