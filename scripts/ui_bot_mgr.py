@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:18:57
+LastEditTime: 2023-08-24 11:38:06
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -12,11 +12,12 @@ import tempfile
 import os
 import shutil
 import json
-from scripts.base import bin_path
+from scripts import base
 
 def load_config(key):
     jsonObject = {}
-    config_path = os.path.join(bin_path, "config.json")
+    print(base.get_bin_path())
+    config_path = os.path.join(base.get_bin_path(), "config.json")
     if os.path.isfile(config_path):
         with open(config_path, "r") as file:
             jsonObject = json.load(file)

@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:25:37
+LastEditTime: 2023-08-24 11:36:53
 Description: file content
 '''
 import os
@@ -19,6 +19,9 @@ api_url = "https://api.github.com/repos/SpenserCai/sd-webui-discord/releases/lat
 def init_base():
     global bin_path
     bin_path = os.path.join(get_my_dir(), "bin")
+
+def get_bin_path():
+    return os.path.join(get_my_dir(), "bin")
 
 def get_bin_process_path():
     if sys.platform == "win32":
