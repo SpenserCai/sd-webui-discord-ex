@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 23:38:58
+LastEditTime: 2023-08-24 23:42:52
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -87,7 +87,6 @@ def discord_tab():
                     var textarea = logArea.querySelector('textarea');
                     window.discord_ex_log = window.setInterval(function() {
                         textarea.scrollTop = textarea.scrollHeight;
-                        console.log("scroll");
                     }, 500);
                     
                 }
