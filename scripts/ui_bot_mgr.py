@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:29:24
+LastEditTime: 2023-08-24 14:32:54
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -42,16 +42,16 @@ def get_desensitization_token(token):
 def start(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
     startButton.visible = False
     stopButton.visible = True
-    log.value = "Starting...\n"
+    log.value += "Starting...\n"
     process_ctrl.ProcessCtrl.start()
-    log.value = "Started\n"
+    log.value += "Started\n"
 
 def stop(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
     startButton.visible = True
     stopButton.visible = False
-    log.value = "Stopping...\n"
+    log.value += "Stopping...\n"
     process_ctrl.ProcessCtrl.stop()
-    log.value = "Stopped\n"
+    log.value += "Stopped\n"
 
 
 def discord_tab():
@@ -77,6 +77,7 @@ def discord_tab():
                 # 一个启动按钮
                 start = gr.Button("Start")
                 stop = gr.Button("Stop",visible=False)
+                start.click(inputs=[start,stop,log],outputs=[],fn=start)
                 
 
 
