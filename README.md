@@ -3,11 +3,13 @@
  * @Date: 2023-08-24 00:06:52
  * @version: 
  * @LastEditors: SpenserCai
- * @LastEditTime: 2023-08-24 18:07:40
+ * @LastEditTime: 2023-08-24 18:34:25
  * @Description: file content
 -->
 # SD-WEBUI-DISCORD-EX
-This is an extension of [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webui-discord) for the Stable Diffusion WebUI, which enables a Discord bot for distributed deployment of SD nodes. The command usage on Discord can be referred to the [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webui-discord) project.
+This is an extension of [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webui-discord) on the Stable Diffusion WebUI, which supports distributed deployment of SD node's Stable Diffusion WebUi Discord robots. The command usage on Discord can refer to the [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webui-discord) project.
+
+<img src="./.github/image/controlnet_2.jpeg" />
 
 ## Usage
 1. Install this extensions from the 'Extensions' tab page of the Stable Diffusion WebUI.
@@ -38,3 +40,6 @@ This is an extension of [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webu
 4. Restart the Stable Diffusion WebUI.
    
 5. Find `Discord` tab and click `Start` button to start the Discord bot.
+
+## Tips
+1. The installation script retrieves the binary file from the Release of SD-WEBUI-DISCORD, which is automatically compiled by Github Action. Alternatively, you can compile SD-WEBUI-DISCORD yourself and place it in the 'bin' directory of the plugin directory.
