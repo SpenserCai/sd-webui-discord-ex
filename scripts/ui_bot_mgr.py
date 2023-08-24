@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:45:22
+LastEditTime: 2023-08-24 13:26:31
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -24,6 +24,8 @@ def load_config(key):
         return jsonObject.get("discord", {}).get("token", "")
     elif key == "server_id":
         return jsonObject.get("discord", {}).get("server_id", "")
+    elif key == "node_list":
+        return jsonObject.get("sd_webui", {}).get("servers", [])
     
 def get_desensitization_token(token):
     # 如果token不是<your token here>，则只保留开头和结尾各5个字符，如果总长度小于10，则全部替换为*
@@ -38,17 +40,25 @@ def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
         with gr.Row():
             with gr.Column():
-                token = gr.Textbox(placeholder="Enter your Discord Bot Token", label="Discord Bot Token")
+                gr.Label("DISCORD CONFIG")
+                token = gr.Textbox(readonly=True, label="Discord Bot Token")
                 token.value = get_desensitization_token(load_config("token"))
-
-                token_old = gr.Textbox(visible=False)
-                token_old.value = load_config("token")
                 
-                server_id = gr.Textbox(placeholder="Enter your Discord Server ID", label="Discord Server ID")
+                server_id = gr.Textbox(readonly=True, label="Discord Server ID")
                 server_id.value = load_config("server_id")
-                # 一个保存按钮
-                save = gr.Button("Save")
+
+                gr.Label("WebUI NODE LIST")
+                node_list = load_config("node_list")
+                node_array = []
+                for node in node_list:
+                    node_array.append([node.get("name", ""), node.get("host", ""), node.get("max_concurrent", "")])
+                n_dataframe = gr.Dataframe(headers=["Name","Host","MaxConcurrent"], type="array", label="Node List")
+                n_dataframe.value = node_array
+
+
+                
             with gr.Column():
+                gr.Label("SD-WEBUI-DISCORD LOG")
                 # 一个长文本框，显示日至，只读的
                 log = gr.Textbox(lines=20, readonly=True)
                 # 一个启动按钮
