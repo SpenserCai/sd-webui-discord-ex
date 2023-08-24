@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 15:47:22
+LastEditTime: 2023-08-24 15:57:45
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -74,7 +74,7 @@ def discord_tab():
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
                 # 一个长文本框，显示日至，只读的
-                log = gr.Textbox(lines=20, readonly=True)
+                log = gr.Textbox(lines=20,autofocus=True, readonly=True)
                 # 一个启动按钮
                 start_button = gr.Button("Start")
                 stop_button = gr.Button("Stop")
