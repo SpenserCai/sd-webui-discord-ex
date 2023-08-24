@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 11:36:53
+LastEditTime: 2023-08-24 17:18:57
 Description: file content
 '''
 import os
@@ -25,9 +25,9 @@ def get_bin_path():
 
 def get_bin_process_path():
     if sys.platform == "win32":
-        return os.path.join(bin_path, "sd-webui-discord.exe")
+        return os.path.join(get_bin_path(), "sd-webui-discord.exe")
     elif sys.platform == "linux":
-        return os.path.join(bin_path, "sd-webui-discord")
+        return os.path.join(get_bin_path(), "sd-webui-discord")
 
 def get_my_dir():
     if os.path.isdir("extensions/sd-webui-discord-ex"):
