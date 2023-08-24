@@ -12,5 +12,5 @@ import urllib.request
 from tqdm import tqdm
 from scripts.base import *
 
-if not check_bin() or need_update():
+if (not check_bin()) or need_update():
     download_bin()
