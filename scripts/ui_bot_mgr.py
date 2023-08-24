@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:16:32
+LastEditTime: 2023-08-24 14:21:04
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -35,7 +35,7 @@ def get_desensitization_token(token):
     if token != "<your token here>":
         if len(token) < 10:
             return "*" * len(token)
-        return token[:5] + "*" * (len(token) - 10) + token[-5:]
+        return token[:5] + "*" * 10 + token[-5:]
     return token
 
 
