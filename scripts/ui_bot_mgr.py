@@ -16,7 +16,6 @@ from scripts import base
 
 def load_config(key):
     jsonObject = {}
-    print(base.get_bin_path())
     config_path = os.path.join(base.get_bin_path(), "config.json")
     if os.path.isfile(config_path):
         with open(config_path, "r") as file:
