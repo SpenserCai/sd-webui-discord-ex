@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 22:53:35
+LastEditTime: 2023-08-24 23:16:48
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -45,14 +45,7 @@ def start_bot(log):
         return "Already Running\n"
     process_ctrl.ProcessCtrl.start()
     while process_ctrl.ProcessCtrl.is_running():
-        jsCode = """
-        <script>
-            var logArea = document.getElementById('log_area');
-            var textarea = logArea.querySelector('textarea');
-            textarea.scrollTop = textarea.scrollHeight;
-        </script>
-        """
-        yield process_ctrl.ProcessCtrl.LogData + jsCode
+        yield process_ctrl.ProcessCtrl.LogData
         time.sleep(1)
 
 def stop_bot():
@@ -88,9 +81,9 @@ def discord_tab():
                 jscode = """
                 var logArea = document.getElementById('log_area');
                 var textarea = logArea.querySelector('textarea');
-                textarea.addEventListener('change', function(event) {
-                  textarea.scrollTop = textarea.scrollHeight;
-                });
+                window.setInterval(function() {
+                    textarea.scrollTop = textarea.scrollHeight;
+                }, 500);
                 """
                 # 一个启动按钮
                 start_button = gr.Button("Start")
