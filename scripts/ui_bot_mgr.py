@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 15:57:45
+LastEditTime: 2023-08-24 16:31:29
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -74,11 +74,17 @@ def discord_tab():
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
                 # 一个长文本框，显示日至，只读的
-                log = gr.Textbox(lines=20,autofocus=True, readonly=True)
+                log = gr.Textbox(lines=50, readonly=True,elem_id="log_area")
+                # 注入js代码，每次更新日志后，滚动条自动滚动到最底部
+                js_code = """
+                var textarea = document.getElementById("log_area");
+                textarea.scrollTop = textarea.scrollHeight;
+                """
+                
                 # 一个启动按钮
                 start_button = gr.Button("Start")
                 stop_button = gr.Button("Stop")
-                start_button.click(inputs=[log],outputs=[log],fn=start_bot)
+                start_button.click(inputs=[log],outputs=[log],fn=start_bot,_js=js_code)
                 stop_button.click(inputs=[],outputs=[log],fn=stop_bot)
                 
 
