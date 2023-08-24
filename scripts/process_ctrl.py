@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-24 09:33:45
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 17:41:57
+LastEditTime: 2023-08-24 17:47:33
 Description: file content
 '''
 import subprocess
@@ -22,9 +22,9 @@ class ProcessCtrl:
         ProcessCtrl.__process = subprocess.Popen(get_bin_process_path(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
         for line in iter(ProcessCtrl.__process.stdout.readline, ""):
             ProcessCtrl.AllLogData += line
-            # LogData只保留最后20行
-            if len(ProcessCtrl.AllLogData.split("\n")) > 20:
-                ProcessCtrl.LogData = "\n".join(ProcessCtrl.AllLogData.split("\n")[-20:])
+            # LogData只保留最后10行
+            if len(ProcessCtrl.AllLogData.split("\n")) > 10:
+                ProcessCtrl.LogData = "\n".join(ProcessCtrl.AllLogData.split("\n")[-10:])
             else:
                 ProcessCtrl.LogData = ProcessCtrl.AllLogData
         ProcessCtrl.__process.wait()
