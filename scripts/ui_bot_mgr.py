@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 22:37:46
+LastEditTime: 2023-08-24 22:43:09
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -81,9 +81,10 @@ def discord_tab():
                 jscode = """
                 var logArea = document.getElementById('log_area');
                 var textarea = logArea.querySelector('textarea');
-                textarea.scrollTop = textarea.scrollHeight;
+                textarea.addEventListener('change', function(event) {
+                  textarea.scrollTop = textarea.scrollHeight;
+                });
                 """
-                log.change(_js=jscode)
                 # 一个启动按钮
                 start_button = gr.Button("Start")
                 stop_button = gr.Button("Stop")
