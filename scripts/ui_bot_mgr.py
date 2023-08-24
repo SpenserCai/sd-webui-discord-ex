@@ -83,6 +83,7 @@ def discord_tab():
                 var textarea = logArea.querySelector('textarea');
                 window.setInterval(function() {
                     textarea.scrollTop = textarea.scrollHeight;
+                    console.log("scroll");
                 }, 500);
                 """
                 # 一个启动按钮
