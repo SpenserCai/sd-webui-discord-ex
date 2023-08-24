@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 18:18:30
+LastEditTime: 2023-08-25 00:00:58
 Description: file content
 '''
 import os
@@ -46,7 +46,6 @@ def need_update():
     tag_name = data["tag_name"]
     with open(os.path.join(bin_path, ".version"), "r") as file:
         version = file.read()
-    # version 去掉头尾空格换行符
     version = version.strip()
     if tag_name == version:
         return False

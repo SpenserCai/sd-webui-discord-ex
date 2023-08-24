@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 23:49:33
+LastEditTime: 2023-08-25 00:00:48
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -31,8 +31,6 @@ def load_config(key):
         return jsonObject.get("sd_webui", {}).get("servers", [])
     
 def get_desensitization_token(token):
-    print(token)
-    # 如果token不是<your token here>，则只保留开头和结尾各5个字符，如果总长度小于10，则全部替换为*
     if token != "<your token here>":
         if len(token) < 10:
             return "*" * len(token)
@@ -40,7 +38,6 @@ def get_desensitization_token(token):
     return token
 
 def start_bot(log):
-    # 如果已经在运行，则不再启动
     if process_ctrl.ProcessCtrl.is_running():
         return "Already Running\n"
     process_ctrl.ProcessCtrl.start()
