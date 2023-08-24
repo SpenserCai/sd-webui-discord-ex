@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-24 09:33:45
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:26:24
+LastEditTime: 2023-08-24 15:38:41
 Description: file content
 '''
 import subprocess
@@ -13,6 +13,7 @@ from scripts.base import get_bin_process_path
 class ProcessCtrl:
     __status = False
     __process = None
+    LogData = ""
 
     def start():
         ProcessCtrl.__status = True
