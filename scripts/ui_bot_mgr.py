@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 13:37:09
+LastEditTime: 2023-08-24 13:47:02
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -30,6 +30,7 @@ def load_config(key):
         return jsonObject.get("sd_webui", {}).get("servers", [])
     
 def get_desensitization_token(token):
+    print(token)
     # 如果token不是<your token here>，则只保留开头和结尾各5个字符，如果总长度小于10，则全部替换为*
     if token != "<your token here>":
         if len(token) < 10:
@@ -43,10 +44,10 @@ def discord_tab():
         with gr.Row():
             with gr.Column():
                 gr.Label("DISCORD CONFIG")
-                token = gr.Textbox(readonly=True, label="Discord Bot Token")
+                token = gr.Textbox(label="Discord Bot Token")
                 token.value = get_desensitization_token(load_config("token"))
                 
-                server_id = gr.Textbox(readonly=True, label="Discord Server ID")
+                server_id = gr.Textbox(label="Discord Server ID")
                 server_id.value = load_config("server_id")
 
                 gr.Label("WebUI NODE LIST")
