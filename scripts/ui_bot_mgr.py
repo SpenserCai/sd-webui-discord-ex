@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 16:37:12
+LastEditTime: 2023-08-24 17:13:56
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -40,21 +40,17 @@ def get_desensitization_token(token):
     return token
 
 def start_bot(log):
-    process_ctrl.ProcessCtrl.LogData = log + "Starting...\n"
+    # 如果已经在运行，则不再启动
+    if process_ctrl.ProcessCtrl.is_running():
+        return "Already Running\n"
     process_ctrl.ProcessCtrl.start()
     while process_ctrl.ProcessCtrl.is_running():
-        # 如果超过20行只保留最后20行
-        if len(process_ctrl.ProcessCtrl.LogData.split("\n")) > 20:
-            process_ctrl.ProcessCtrl.LogData = "\n".join(process_ctrl.ProcessCtrl.LogData.split("\n")[-20:])
-        process_ctrl.ProcessCtrl.LogData += datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ": Running...\n"
         yield process_ctrl.ProcessCtrl.LogData
         time.sleep(1)
 
 def stop_bot():
     if process_ctrl.ProcessCtrl.is_running():
-        process_ctrl.ProcessCtrl.LogData += "Stopping...\n"
         process_ctrl.ProcessCtrl.stop()
-        return process_ctrl.ProcessCtrl.LogData + "Stopped\n"
     return process_ctrl.ProcessCtrl.LogData + "Not Running\n"
 
 
