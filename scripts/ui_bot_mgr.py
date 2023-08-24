@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:15:08
+LastEditTime: 2023-08-24 14:16:32
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -61,8 +61,6 @@ def discord_tab():
                 log = gr.Textbox(lines=20, readonly=True)
                 # 一个启动按钮
                 start = gr.Button("Start")
-                # 一个停止按钮
-                stop = gr.Button("Stop")
                 
 
 
