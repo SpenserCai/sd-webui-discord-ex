@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:21:04
+LastEditTime: 2023-08-24 14:29:24
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -13,6 +13,7 @@ import os
 import shutil
 import json
 from scripts import base
+from scripts import process_ctrl
 
 def load_config(key):
     jsonObject = {}
@@ -38,6 +39,20 @@ def get_desensitization_token(token):
         return token[:5] + "*" * 10 + token[-5:]
     return token
 
+def start(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
+    startButton.visible = False
+    stopButton.visible = True
+    log.value = "Starting...\n"
+    process_ctrl.ProcessCtrl.start()
+    log.value = "Started\n"
+
+def stop(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
+    startButton.visible = True
+    stopButton.visible = False
+    log.value = "Stopping...\n"
+    process_ctrl.ProcessCtrl.stop()
+    log.value = "Stopped\n"
+
 
 def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
@@ -61,6 +76,7 @@ def discord_tab():
                 log = gr.Textbox(lines=20, readonly=True)
                 # 一个启动按钮
                 start = gr.Button("Start")
+                stop = gr.Button("Stop",visible=False)
                 
 
 
