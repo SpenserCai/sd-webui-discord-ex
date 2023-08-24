@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 17:13:56
+LastEditTime: 2023-08-24 17:45:53
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -51,6 +51,10 @@ def start_bot(log):
 def stop_bot():
     if process_ctrl.ProcessCtrl.is_running():
         process_ctrl.ProcessCtrl.stop()
+        while process_ctrl.ProcessCtrl.is_running():
+            yield process_ctrl.ProcessCtrl.LogData
+            time.sleep(1)
+        return process_ctrl.ProcessCtrl.LogData + "Stopped\n"
     return process_ctrl.ProcessCtrl.LogData + "Not Running\n"
 
 
