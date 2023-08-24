@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-24 14:48:31
+LastEditTime: 2023-08-24 14:54:50
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -39,21 +39,17 @@ def get_desensitization_token(token):
         return token[:5] + "*" * 10 + token[-5:]
     return token
 
-def start_bot(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
-    startButton.visible = False
-    stopButton.visible = True
-    outData = log.value + "Starting...\n"
+def start_bot(log):
+    outData = log + "Starting...\n"
     process_ctrl.ProcessCtrl.start()
     while process_ctrl.ProcessCtrl.is_running():
         yield outData + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ":" +"Running...\n"
         time.sleep(1)
 
-def stop_bot(startButton:gr.Button,stopButton:gr.Button,log:gr.Textbox):
-    startButton.visible = True
-    stopButton.visible = False
-    log.value += "Stopping...\n"
+def stop_bot(log):
+    log += "Stopping...\n"
     process_ctrl.ProcessCtrl.stop()
-    return log.value + "Stopped\n"
+    return log + "Stopped\n"
 
 
 def discord_tab():
@@ -77,10 +73,10 @@ def discord_tab():
                 # 一个长文本框，显示日至，只读的
                 log = gr.Textbox(lines=20, readonly=True)
                 # 一个启动按钮
-                start = gr.Button("Start")
-                stop = gr.Button("Stop",visible=False)
-                start.click(inputs=[start,stop,log],outputs=[log],fn=start_bot)
-                stop.click(inputs=[start,stop,log],outputs=[log],fn=stop_bot)
+                start_button = gr.Button("Start")
+                stop_button = gr.Button("Stop",visible=False)
+                start_button.click(inputs=[log],outputs=[log],fn=start_bot)
+                stop_button.click(inputs=[log],outputs=[log],fn=stop_bot)
                 
 
 
