@@ -12,6 +12,20 @@ This is an extension of [SD-WEBUI-DISCORD](https://github.com/SpenserCai/sd-webu
 <img src="./.github/image/controlnet_2.jpeg" />
 
 ## Usage
+You need to install the following extensions on the SD webui:
+
+[sd-webui-segment-anythin](https://github.com/continue-revolution/sd-webui-segment-anything)
+
+[sd-weubi-deoldify](https://github.com/SpenserCai/sd-webui-deoldify)
+
+[stable-diffusion-webui-rembg](https://github.com/AUTOMATIC1111/stable-diffusion-webui-rembg)
+
+[sd-webui-roop](https://github.com/s0md3v/sd-webui-roop)
+
+[sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet)
+
+***
+
 1. Install this extensions from the 'Extensions' tab page of the Stable Diffusion WebUI.
 
 2. Create a Discord bot and get the bot token. The tutorial can be found [here](https://discord.com/developers/docs/getting-started).
