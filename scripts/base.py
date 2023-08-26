@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-25 00:00:58
+LastEditTime: 2023-08-26 18:12:00
 Description: file content
 '''
 import os
@@ -72,6 +72,9 @@ def download_bin():
             if file == "config.json":
                 if os.path.isfile(os.path.join(bin_path, file)):
                     continue
+            # 如果文件存在，删除
+            if os.path.isfile(os.path.join(bin_path, file)):
+                os.remove(os.path.join(bin_path, file))
             shutil.move(os.path.join(bin_path, "release", file), bin_path)
         shutil.rmtree(os.path.join(bin_path, "release"))
     
