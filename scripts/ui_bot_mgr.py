@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-27 21:27:36
+LastEditTime: 2023-08-27 21:30:13
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -54,6 +54,9 @@ def stop_bot():
         return process_ctrl.ProcessCtrl.LogData + "Stopped\n"
     return process_ctrl.ProcessCtrl.LogData + "Not Running\n"
 
+def GetTest():
+    return "Test"
+
 
 def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
@@ -73,7 +76,7 @@ def discord_tab():
                 
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
-                test_lab = gr.Label("Test1")
+                test_lab = gr.Label(GetTest())
                 log = gr.Textbox(lines=25, readonly=True, elem_id="log_area")
                 start_jscode = """
                 function() {
