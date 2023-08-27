@@ -3,7 +3,7 @@
  * @Date: 2023-08-24 00:06:52
  * @version: 
  * @LastEditors: SpenserCai
- * @LastEditTime: 2023-08-24 18:34:25
+ * @LastEditTime: 2023-08-27 15:19:10
  * @Description: file content
 -->
 # SD-WEBUI-DISCORD-EX
@@ -48,6 +48,23 @@ You need to install the following extensions on the SD webui:
         "token":"<your token here>",
         "server_id":"<your servers id here if empty all servers>"
     }
+}
+```
+
+If you want set default value with sd-webui
+```json
+{
+    "sd_webui":{
+        "servers":[...],
+        "default_setting": {
+            "cfg_scale": 8,
+            "negative_prompt": "bad,text,watermask",
+            "height":1024,
+            "width":1024,
+            "steps":32
+        }
+    }
+    ...
 }
 ```
 
