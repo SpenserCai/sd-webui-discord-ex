@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-27 21:24:22
+LastEditTime: 2023-08-27 21:27:36
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -73,7 +73,7 @@ def discord_tab():
                 
             with gr.Column():
                 gr.Label("SD-WEBUI-DISCORD LOG")
-                test_lab = gr.Label("Test")
+                test_lab = gr.Label("Test1")
                 log = gr.Textbox(lines=25, readonly=True, elem_id="log_area")
                 start_jscode = """
                 function() {
