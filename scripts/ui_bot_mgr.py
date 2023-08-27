@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-25 00:00:48
+LastEditTime: 2023-08-27 15:19:56
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -99,8 +99,6 @@ def discord_tab():
                 start_button.click(inputs=[log],outputs=[log],fn=start_bot,_js=start_jscode)
                 stop_button.click(inputs=[],outputs=[log],fn=stop_bot,_js=stop_jscode)
                 
-
-
 
     return [(ui,"Discord","Discord")]
 
