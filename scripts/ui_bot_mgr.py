@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:07:15
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-27 15:19:56
+LastEditTime: 2023-08-27 22:03:09
 Description: file content
 '''
 from modules import script_callbacks, paths_internal
@@ -53,7 +53,6 @@ def stop_bot():
             time.sleep(1)
         return process_ctrl.ProcessCtrl.LogData + "Stopped\n"
     return process_ctrl.ProcessCtrl.LogData + "Not Running\n"
-
 
 def discord_tab():
     with gr.Blocks(analytics_enabled=False) as ui:
