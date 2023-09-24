@@ -3,7 +3,7 @@ Author: SpenserCai
 Date: 2023-08-23 23:12:27
 version: 
 LastEditors: SpenserCai
-LastEditTime: 2023-08-26 18:12:00
+LastEditTime: 2023-09-24 22:37:16
 Description: file content
 '''
 import os
@@ -65,6 +65,9 @@ def download_bin():
     with tarfile.open(release_path, "r:gz") as tar:
         members = [m for m in tar.getmembers() if m.name.startswith("release")]
         tar.extractall(path=bin_path, members=members)
+    # 如果bin目录下存在location目录，删除
+    if os.path.isdir(os.path.join(bin_path, "location")):
+        shutil.rmtree(os.path.join(bin_path, "location"))
     # 判断release目录是否存在，如果存在把里面的文件移动到bin目录下，然后删除release目录
     if os.path.isdir(os.path.join(bin_path, "release")):
         for file in os.listdir(os.path.join(bin_path, "release")):
